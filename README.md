@@ -354,8 +354,8 @@ $𝑚𝑜𝑛𝑖𝑡𝑜𝑟("𝑇𝑖𝑚𝑒: %0𝑡 | 𝑋_𝑖𝑛: %0𝑑 
 𝑒𝑛𝑑
 𝑒𝑛𝑑𝑚𝑜𝑑𝑢𝑙𝑒
 ```
-### **Functional Verification using Cadence Incisive:**
-#### Commands to visualize the Waveforms in Cadence incisive
+### **Functional Verification using Cadence NCSim:**
+#### Commands to visualize the Waveforms in Cadence NCSim
 
   - First step is to compile the Verilog design.
   - Second step is to elaborate and optimize the design.
@@ -390,3 +390,59 @@ c)  Now you will be able to visualize the waveforms
 ```
 ##
 ### **Synthesis**
+
+### **SDC Script:**
+- Type the following script and save in a file named "cordic.sdc"
+
+```sdc
+𝑐𝑟𝑒𝑎𝑡𝑒_𝑐𝑙𝑜𝑐𝑘 −𝑛𝑎𝑚𝑒 "𝑐𝑙𝑘" −𝑝𝑒𝑟𝑖𝑜𝑑 10.0 −𝑤𝑎𝑣𝑒𝑓𝑜𝑟𝑚 {0 5} [𝑔𝑒𝑡_𝑝𝑜𝑟𝑡𝑠 𝑐𝑙𝑘]
+```
+
+### **TCL Script:**
+- Type the following script and save in a file named "run.tcl"
+```tcl
+𝑟𝑒𝑎𝑑_ℎ𝑑𝑙 /ℎ𝑜𝑚𝑒/𝑣𝑙𝑠𝑖/𝐶𝑜𝑟𝑑𝑖𝑐/𝑐𝑜𝑟𝑑𝑖𝑐.𝑣
+𝑟𝑒𝑎𝑑_𝑙𝑖𝑏𝑠 /ℎ𝑜𝑚𝑒/𝑖𝑛𝑠𝑡𝑎𝑙𝑙/𝐹𝑂𝑈𝑁𝐷𝑅𝑌/𝑑𝑖𝑔𝑖𝑡𝑎𝑙/45𝑛𝑚/𝑑𝑖𝑔/𝑙𝑖𝑏/𝑠𝑙𝑜𝑤.𝑙𝑖𝑏
+𝑒𝑙𝑎𝑏𝑜𝑟𝑎𝑡𝑒 𝑐𝑜𝑟𝑑𝑖𝑐_𝑝𝑖𝑝𝑒𝑙𝑖𝑛𝑒
+𝑠𝑦𝑛_𝑔𝑒𝑛𝑒𝑟𝑖𝑐
+𝑠𝑦𝑛_𝑚𝑎𝑝
+𝑟𝑒𝑎𝑑_𝑠𝑑𝑐 𝑐𝑜𝑟𝑑𝑖𝑐.𝑠𝑑𝑐
+𝑠𝑦𝑛_𝑜𝑝𝑡
+# 𝑔𝑢𝑖_𝑠ℎ𝑜𝑤
+# 𝑔𝑢𝑖_ℎ𝑖𝑑𝑒
+𝑐ℎ𝑒𝑐𝑘_𝑑𝑒𝑠𝑖𝑔𝑛
+𝑐ℎ𝑒𝑐𝑘_𝑡𝑖𝑚𝑖𝑛𝑔_𝑖𝑛𝑡𝑒𝑛𝑡
+𝑟𝑒𝑝𝑜𝑟𝑡_𝑞𝑜𝑟 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑞𝑜𝑟.𝑟𝑒𝑝
+𝑟𝑒𝑝𝑜𝑟𝑡_𝑡𝑖𝑚𝑖𝑛𝑔 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑡𝑖𝑚𝑖𝑛𝑔.𝑟𝑒𝑝
+𝑟𝑒𝑝𝑜𝑟𝑡_𝑝𝑜𝑤𝑒𝑟 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑝𝑜𝑤𝑒𝑟.𝑟𝑒𝑝
+𝑟𝑒𝑝𝑜𝑟𝑡_𝑎𝑟𝑒𝑎 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑎𝑟𝑒𝑎.𝑟𝑒𝑝
+𝑤𝑟𝑖𝑡𝑒_𝑛𝑒𝑡𝑙𝑖𝑠𝑡 𝑐𝑜𝑟𝑑𝑖𝑐_𝑝𝑖𝑝𝑒𝑙𝑖𝑛𝑒 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑠𝑦𝑛𝑡ℎ.v
+𝑤𝑟𝑖𝑡𝑒_𝑠𝑑𝑐 > 𝑐𝑜𝑟𝑑𝑖𝑐_𝑠𝑑𝑐.𝑠𝑑𝑐
+```
+### **Explaination**:
+
+1.	`read_hdl /home/vlsi/Cordic/cordic.v`: Reads the Verilog HDL file for the CORDIC design, which contains the logic description of the module.
+2.	`read_libs /home/install/FOUNDRY/digital/45nm/dig/lib/slow.lib`: Loads the technology library file (slow.lib) for synthesis, providing cell definitions for the target process (45nm).
+3.	`elaborate cordic_pipeline`: Performs elaboration of the design, which means interpreting the Verilog code and resolving design objects.
+4.	`syn_generic`: Generates a generic RTL representation of the design for synthesis.
+5.	`syn_map`: Maps the RTL design to specific cells in the target technology library (45nm), optimizing for area and timing.
+6.	`read_sdc cordic.sdc`: Reads the SDC (Synopsys Design Constraints) file, which contains timing and physical constraints for the design.
+7.	`syn_opt`: Performs optimization of the synthesized design to improve timing, area, and power.
+8.	`check_design`: Verifies that the design is correct and all logical components are in place.
+9.	`check_timing_intent`: Ensures that the design's timing constraints are met and properly implemented.
+10.	`report_qor > cordic_qor.rep`: Generates a Quality of Results (QoR) report, which includes overall design metrics like area, timing, and power.
+11.	`report_timing > cordic_timing.rep`: Generates a detailed timing report showing the setup and hold times of the design.
+12.	`report_power > cordic_power.rep`: Generates a power report showing the estimated power consumption of the design.
+13.	`report_area > cordic_area.rep`: Generates an area report showing the total area used by the design in the layout.
+14.	`write_netlist cordic_pipeline > cordic_synth.v`: Writes the synthesized netlist to a Verilog file (`cordic_synth.v`), which contains the final design in terms of gates and connections.
+15.	`write_sdc > cordic_sdc.sdc`: Writes the design constraints (SDC) to a new file (`cordic_sdc.sdc`), which is used in the subsequent steps of implementation.
+
+### **Commands**:
+
+- **In Cadence Environment type the following in the terminal:**
+```bash
+gedit run.tcl //Type the TCL Script in this file
+gedit cordic.sdc //Type the SDC Script in this file
+genus ./run.tcl
+gui_show
+```
