@@ -1,5 +1,7 @@
 # **Design Of A CORDIC CORE : RTL to GDS**
 
+The below repositry shows a detailed guide to perform physical design of any appilcation code taking CORDIC CORE as an example. I have used gpdk45 as my choice of PDK as it is widely available in any institutions and also its simplicity. The CORDIC (Coordinate Rotation Digital Computer) core is an efficient hardware algorithm for performing complex mathematical computations like trigonometric, hyperbolic, and logarithmic functions without using multipliers. Its simplicity and iterative nature make it ideal for resource-constrained systems in applications such as signal processing, robotics, and communications.
+
 ## Basic Details 🚀
 #### -  Name: Akash V Kashyap
 #### - College: Dayananda Sagar College of Engineering, Bengaluru-560078
@@ -20,6 +22,31 @@
 - [**5. Literature Survey**](#5-literature-survey)
 - [**6. Block Diagram**](#6-block-diagram)
 - [**7. Flowchart**](#7-flowchart)
+- [**8. Tools Used**](#8-tools-used)
+- [**9. Implementation**](#9-implementation)
+  - [**9.1 RTL Design**](#91-rtl-design)
+  - [**9.2 Functional Verification using Cadence NCSim**](#92-functional-verification-using-cadence-ncsim)
+  - [**9.3 Synthesis**](#93-synthesis)
+  - [**9.4 Physical Design**](#94-physical-design)
+      -  [**9.4.1 Importing Design in Cadence Innovus**](#941-importing-design-in-cadence-innovus)
+      -  [**9.4.2 Floorplanning**](#942-floorplanning)
+      -  [**9.4.3 Power Planning**](#943-power-planning)
+      -  [**9.4.4 Pre-Placement**](#944-pre-placement)
+      -  [**9.4.5 Placement**](#945-placement)
+      -  [**9.4.6 Report Generation and Optimization**](#946-report-generation-and-optimization)
+      -  [**9.4.7 Clock Tree Synthesis (CTS)**](#947-clock-tree-synthesis-cts)
+      -  [**9.4.8 Routing**](#948-routing)
+      -  [**9.4.9 Saving the Database**](#949-saving-the-database)
+      -  [**9.4.10 Physical Verification: Capturing DRC and LVS**](#9410-physical-verification-capturing-drc-and-lvs)
+  - [**9.5 Additional Checks done to verify design**](#95-additional-checks-done-to-verify-design)
+- [**10. Final Project Outcome**](#10-final-project-outcome)
+- [**11. Application, Advantages, and Limitations**](#11-application-advantages-and-limitations)
+  - [**11.1 Applications**](#111-applications)
+  - [**11.2 Advantages**](#112-advantages)
+  - [**11.3 Limitations**](#113-limitations)
+- [**12. Conclusion**](#12-conclusion)
+- [**13. Future Scope**](#13-future-scope)
+- [**14. References**](#14-references)
 
 ##
 ## **1. Introduction to the CORDIC Algorithm**
@@ -98,14 +125,15 @@ Equation for Sine using LUT:
 - Requires large amounts of memory to store function values, limiting scalability for high precision.
 - Limited by the resolution of the stored data; higher precision requires larger tables.
 
-### **3. Why CORDIC Was Chosen?**:
+##
+## **3. Why CORDIC Was Chosen?**:
 
 CORDIC was chosen for its simplicity, efficiency, and versatility in hardware implementations. Unlike Taylor series or polynomial approximations, which require complex operations like multiplication and division, CORDIC relies on iterative shift-and-add operations, making it ideal for FPGA or ASIC designs with limited resources. Its scalability allows precision to be adjusted by varying the number of iterations, ensuring efficient hardware utilization.
 
 Additionally, CORDIC's single algorithmic structure can compute a wide range of functions—trigonometric, hyperbolic, logarithmic, and square root—without significant modifications. This flexibility surpasses specialized methods like Newton-Raphson or lookup tables, which are limited to specific operations. Its compatibility with fixed-point arithmetic further enhances its suitability for low-power, high-speed applications in signal processing, image processing, telecommunications, and embedded systems.
 
 ##
-### **4. Objectives**
+## **4. Objectives**
 1. **Development of a Configurable CORDIC IP Core**: Design a highly adaptable CORDIC core capable of computing mathematical functions like trigonometric, logarithmic, and exponential operations with optimized hardware efficiency.
 
 2. **Physical Design and Tapeout Preparation**: Transform the Verilog RTL code into a physical design, focusing on critical steps such as floorplanning, clock tree synthesis (CTS), and static timing analysis (STA) to meet power, area, and timing constraints.
@@ -115,7 +143,7 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 4. **Customization and Flexibility**: Provide a configurable architecture to tailor the CORDIC core for diverse applications, balancing performance, area, power, and resource requirements.
 
 ##
-### **5. Literature Survey**
+## **5. Literature Survey**
 | **S.No** | **Paper/Study** | **Existing Approach** | **Implementation to Our Project** |
 |------|--------------|------------------------------|-------------------------------|
 | 1. | **Volder, J.E. (1959)**	| CORDIC introduced as a method to compute trigonometric functions using only addition, subtraction, and shifting.	Introduced the foundational pipelined algorithm. | Implemented the physical design process for optimized performance and efficient resource utilization.|
@@ -125,21 +153,22 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 | 5. | **NPTEL CORDIC Algorithm (2021)** | The NPTEL course covers the basic CORDIC algorithm for computing trigonometric functions and its hardware implementation.	| Our project improves upon this by creating a highly configurable CORDIC IP core, adding advanced physical design techniques and preparing the design for tape-out using industry- standard tools like Cadence Innovus and Genus. |
 
 ##
-### **6. Block Diagram**
+## **6. Block Diagram**
+
 <p align="center">
 <img width=500 src="https://github.com/user-attachments/assets/79636560-3c64-4dc7-9365-2a073e8d06b2">
 </p>
 
 ##
-### **7. Flowchart**
+## **7. Flowchart**
 <p align="center">
 <img width=500 src="https://github.com/user-attachments/assets/12fc167f-cfd6-4a2b-9a6b-8f83d0b76711">
 </p>
 
 ##
-### **Tools Used**:
+## **8. Tools Used**
 
-1.	**Xilinx Vivado :**
+### 1. **Xilinx Vivado :**
 
 **Purpose:**
 
@@ -158,7 +187,8 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 - RTL Design: The initial Verilog implementation of the CORDIC algorithm was written and simulated in Xilinx Vivado.
 - Functional Verification: Basic waveforms were generated for checking the correctness of the sin, cos, and arctan outputs.
 
-2.	**Cadence Incisive :**
+##
+### 2. **Cadence Incisive :**
 
 **Purpose:**
 
@@ -176,7 +206,8 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 - Waveform Analysis: Ensured that the design behaved as expected under various input scenarios, such as different angles and vector inputs.
 - Debugging: Helped identify and fix logical errors in the RTL code by analyzing simulation outputs.
 
-3.	**Cadence Genus:**
+##
+### 3. **Cadence Genus:**
 
 **Purpose:**
 
@@ -198,8 +229,9 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 
 - Gate-level netlist.
 - Timing reports and constraints.
- 
-4.	**Cadence Innovus:**
+
+##
+### 4. **Cadence Innovus:**
 
 **Purpose:**
 
@@ -222,9 +254,9 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 6.	Automation: TCL scripts for Genus and Innovus.
 
 ##
-### **Implementation**:
+## **9. Implementation**
 
-### **RTL Design:**
+### **9.1 RTL Design**
 ### Inputs:
 
 1.	`clk` (Clock Signal)
@@ -384,7 +416,9 @@ $𝑚𝑜𝑛𝑖𝑡𝑜𝑟("𝑇𝑖𝑚𝑒: %0𝑡 | 𝑋_𝑖𝑛: %0𝑑 
 <img width=1000 src="https://github.com/user-attachments/assets/16a71e01-3a36-4295-9507-fd492c553594">
 </p>
 
-### **Functional Verification using Cadence NCSim:**
+##
+### **9.2 Functional Verification using Cadence NCSim**
+
 #### Commands to visualize the Waveforms in Cadence NCSim
 
   - First step is to compile the Verilog design.
@@ -423,7 +457,7 @@ c)  Now you will be able to visualize the waveforms
 </p>
 
 ##
-### **Synthesis**
+### **9.3 Synthesis**
 
 The synthesis process in Cadence Genus transforms RTL code (written in Verilog or VHDL) into a gate-level representation for hardware implementation. Key inputs include:
 
@@ -511,7 +545,7 @@ gui_show
 </p>
 
 ##
-### **Physical Design:**
+### **9.4 Physical Design**
 
 <p align="center">
 <img width=800 src="https://github.com/user-attachments/assets/491c842e-0dec-4a69-a2a8-315b0cb611a2">
@@ -537,7 +571,8 @@ corresponding workspace.
 2. Start the Cadence tools and use the command: `innovus` and press Enter. 
 3. The Innovus GUI opens, and the terminal enters the Innovus command prompt, ready for tool-specific commands.
 
-### Importing Design in Cadence Innovus
+##
+### **9.4.1 Importing Design in Cadence Innovus**
 
 The design import process in Innovus involves loading all the mandatory inputs, either through script files (e.g., `.globals`, `.view`, `.tcl`) or via the GUI. Below is a step-by-step guide to importing a design:
 
@@ -606,7 +641,8 @@ The `.lib` and SDC files are combined to analyze:
 <img width=500 src="https://github.com/user-attachments/assets/c733c6d7-7dbb-4478-b5d6-faa65bfe79c4">
 </p>
 
-### **Floorplan in Cadence Innovus**
+##
+### **9.4.2 Floorplanning**
 
 The floorplanning process defines the chip's physical structure and optimizes the layout for performance and area. Below are the key steps involved:
 
@@ -644,7 +680,8 @@ The floorplanning process defines the chip's physical structure and optimizes th
 <img width=500 src="https://github.com/user-attachments/assets/b50e09cd-b01e-4e29-8f34-bd3e3aeb4c67">
 </p>
 
-### **Power Planning in Cadence Innovus**
+##
+### **9.4.3 Power Planning**
 
 Power planning ensures that the design receives a reliable and efficient power supply across the entire chip. Below are the key steps involved:
 
@@ -721,7 +758,8 @@ The complete power planning process ensures:
 - Reliable connections from global nets to standard cells.  
 - A well-constructed power mesh with sufficient power for every standard cell to operate smoothly.
 
-### **Pre-Placement**
+##
+### **9.4.4 Pre-Placement**
 
 Pre-placement involves adding specific physical cells to ensure structural integrity and avoid electrical issues before placing the standard cells. The two key physical cells added are **End Caps** and **Well Taps**.
 
@@ -780,7 +818,8 @@ These steps prepare the core for standard cell placement while maintaining relia
 <img width=500 src="https://github.com/user-attachments/assets/3e101787-4464-4ddc-a093-e3300e829ae1">
 </p>
 
-### **Placement in Cadence Innovus**
+##
+### **9.4.5 Placement**
 
 Placement involves arranging standard cells and I/O pins within the core area to optimize timing, reduce power consumption, and minimize wirelength. This step ensures that communicating cells are placed close together to improve performance and avoid congestion.
 
@@ -811,7 +850,8 @@ Proper placement ensures:
 - Balanced power, area, and timing.  
 - A design ready for the next stage: routing.
 
-### **Report Generation and Optimization in Cadence Innovus**
+##
+### **9.4.6 Report Generation and Optimization**
 
 Generating reports and optimizing the design are critical steps in analyzing the design's performance and ensuring it meets timing, area, and power constraints. Below are the steps for report generation and optimization:
 
@@ -870,7 +910,8 @@ Generating reports and optimizing the design are critical steps in analyzing the
 - This process optimizes the design for timing, area, and power while resolving any violations.  
 - Comparing the reports ensures that improvements are quantified and design constraints are met effectively.
 
-### **Clock Tree Synthesis (CTS) in Cadence Innovus**
+##
+### **9.4.7 Clock Tree Synthesis (CTS)**
 
 Clock Tree Synthesis (CTS) ensures that the clock signal reaches all registers (flip-flops) simultaneously or with minimal skew to maintain proper communication across the design.
 
@@ -913,7 +954,8 @@ The CTS process ensures a balanced clock distribution network, minimizing skew a
 <img width=500 src="https://github.com/user-attachments/assets/5e7ed423-cccc-4163-a1f4-5e177963c694">
 </p>
 
-### **Routing in Cadence Innovus** 
+##
+### **9.4.8 Routing** 
 
 Routing is the process of creating actual physical connections (metal routes) between the design components. This step ensures that logical connectivity is translated into real metal wires, avoiding issues such as opens, shorts, crosstalk, or antenna violations.  
 
@@ -949,7 +991,8 @@ The routing process translates logical connections into reliable physical connec
 <img width=500 src="https://github.com/user-attachments/assets/313c1daa-043e-435b-baea-ff1312e26a59">
 </p>
 
-### **Saving the Database in Cadence Innovus**
+##
+### **9.4.9 Saving the Database**
 
 Proper saving of design files is crucial to preserve the progress and ensure compatibility with subsequent design stages.
 
@@ -974,7 +1017,8 @@ Proper saving of design files is crucial to preserve the progress and ensure com
 ### **Outcome**  
 The design, netlist, and GDS files are saved in their respective formats, enabling seamless continuation of the design flow and preparation for tape-out.
 
-### Physical Verification: Capturing DRC and LVS  
+##
+### **9.4.10 Physical Verification: Capturing DRC and LVS**
 
 Physical verification ensures that the design meets all fabrication and connectivity rules before proceeding to manufacturing. This process includes **Design Rule Check (DRC)** and **Layout Versus Schematic (LVS)**.  
 
@@ -1047,7 +1091,7 @@ If required, you can create a GDS file and Stream Out file using the following m
 Physical verification through DRC and LVS ensures that the design meets all manufacturing rules and matches the schematic's intent. This step is essential to avoid costly fabrication errors.
 
 ##
-## **Additional Checks done to verify design:**
+## **9.5 Additional Checks done to verify design**
 <p align="center">
 <img width=500 src="https://github.com/user-attachments/assets/edaed946-b53f-4334-984f-bba97b443911">
 </p> 
@@ -1077,7 +1121,7 @@ Physical verification through DRC and LVS ensures that the design meets all manu
 </p>
 
 ##
-## **Final Project Outcome:**
+## **10. Final Project Outcome**
 
 ### **Power Report:**
 
@@ -1108,9 +1152,9 @@ Physical verification through DRC and LVS ensures that the design meets all manu
 </p>
 
 ##
-## **Application, Advantages, and Limitations**
+## **11. Application, Advantages, and Limitations**
 
-### **Applications**  
+### **11.1 Applications**  
 The CORDIC algorithm is widely used across various domains due to its iterative and efficient computation. Key applications include:  
 
 1. **Digital Signal Processing (DSP):**  
@@ -1136,7 +1180,8 @@ The CORDIC algorithm is widely used across various domains due to its iterative 
 6. **Medical Imaging:**  
    - Applied in CT and MRI image reconstruction algorithms.  
 
-### **Advantages**  
+##
+### **11.2 Advantages**  
 
 1. **Hardware Efficiency:**  
    - Eliminates multipliers using only shift-and-add operations, making it ideal for FPGA and ASIC implementations.  
@@ -1153,7 +1198,8 @@ The CORDIC algorithm is widely used across various domains due to its iterative 
 5. **Real-Time Performance:**  
    - High-speed convergence for latency-critical applications like DSP and communication systems.  
 
-### **Limitations**  
+##
+### **11.3 Limitations**  
 
 1. **Precision Issues:**  
    - Limited accuracy due to truncation and rounding errors in fixed-point implementations.  
@@ -1173,12 +1219,12 @@ The CORDIC algorithm is widely used across various domains due to its iterative 
 The CORDIC algorithm is invaluable for high-performance applications but requires consideration of its trade-offs in precision, range, and modern hardware efficiency.
 
 ##
-## **Conclusion**  
+## **12. Conclusion**  
 
 The CORDIC algorithm was successfully implemented and synthesized in this project, demonstrating its ability to perform efficient trigonometric computations with minimal hardware. Using tools like Cadence Genus and Innovus, the RTL-to-GDS flow was completed, and the GDS file was generated, marking readiness for fabrication. This implementation highlights the algorithm’s suitability for low-power, resource-constrained environments and its broad applicability in areas such as signal processing, robotics, and telecommunications, laying a strong foundation for future advancements in computational hardware systems.
 
 ##
-## **Future Scope**
+## **13. Future Scope**
 The CORDIC algorithm, with its multiplier-less architecture, has significant potential for scaling into advanced computing systems and emerging technologies. Future enhancements can focus on:
 
 1. **Algorithm Optimization:**
@@ -1199,7 +1245,7 @@ The CORDIC algorithm, with its multiplier-less architecture, has significant pot
 As technology advances, the CORDIC algorithm’s efficiency in low-power and high-performance systems positions it as a key component in future innovations across multiple industries.
 
 ##
-## **References**
+## **14. References**
 
 | **S.No.** | **Reference**                                                                                                         | **Details**                                                                                                                                                     |
 |-----------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
