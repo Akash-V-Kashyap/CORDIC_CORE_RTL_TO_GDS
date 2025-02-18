@@ -1,0 +1,29 @@
+ncsim(64): 15.20-s086: (c) Copyright 1995-2020 Cadence Design Systems, Inc.
+
+-------------------------------------
+Relinquished control to SimVision...
+ncsim> 
+ncsim> database -open waves -into waves.shm -default
+Created default SHM database waves
+ncsim> probe -create -shm tb_cordic_pipeline.clk tb_cordic_pipeline.rst tb_cordic_pipeline.theta_in tb_cordic_pipeline.x_in tb_cordic_pipeline.x_out tb_cordic_pipeline.y_in tb_cordic_pipeline.y_out
+Created probe 1
+ncsim> run
+Time: 0 | X_in: x | Y_in: x | Theta_in: x | X_out: 0 | Y_out: 0
+Time: 10 | X_in: -32768 | Y_in: 0 | Theta_in: 0 | X_out: 0 | Y_out: 0
+Time: 110 | X_in: -32768 | Y_in: 0 | Theta_in: 11520 | X_out: 0 | Y_out: 0
+Time: 165 | X_in: -32768 | Y_in: 0 | Theta_in: 11520 | X_out: 27222 | Y_out: -12916
+Time: 210 | X_in: -32768 | Y_in: 0 | Theta_in: 23040 | X_out: 27222 | Y_out: -12916
+Time: 265 | X_in: -32768 | Y_in: 0 | Theta_in: 23040 | X_out: 31515 | Y_out: -20610
+Time: 310 | X_in: -32768 | Y_in: 0 | Theta_in: -11520 | X_out: 31515 | Y_out: -20610
+Time: 365 | X_in: -32768 | Y_in: 0 | Theta_in: -11520 | X_out: -24504 | Y_out: -29249
+Time: 410 | X_in: -32768 | Y_in: 0 | Theta_in: -19456 | X_out: -24504 | Y_out: -29249
+Time: 465 | X_in: -32768 | Y_in: 0 | Theta_in: -19456 | X_out: 30103 | Y_out: 1260
+Time: 510 | X_in: -32768 | Y_in: 0 | Theta_in: 7680 | X_out: 30103 | Y_out: 1260
+Time: 565 | X_in: -32768 | Y_in: 0 | Theta_in: 7680 | X_out: -27933 | Y_out: 25991
+Simulation stopped via $stop(1) at time 610 NS + 0
+ncsim> ^C
+ncsim> exit
+...Regained control from SimVision
+-------------------------------------
+ncsim: Memory Usage - 38.6M program + 90.0M data = 128.7M total (132.2M Peak)
+ncsim: CPU Usage - 5.5s system + 1.8s user = 7.3s total (943.2s, 0.8% cpu)

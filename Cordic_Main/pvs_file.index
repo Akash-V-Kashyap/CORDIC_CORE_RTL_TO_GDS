@@ -1,0 +1,50 @@
+# This PVS File Index Registry was created automatically
+# Do not attempt to modify this file as any change may lead
+# to PVS Debug Environment malfunction.
+# 
+"Run Directory" internal none /home/vlsi/Cordic
+"Current Directory" internal none /home/vlsi
+"Cadence Directory" internal none /home/vlsi/.cadence/
+"Job Signature" internal none IPVS_1729502578_43535
+"PVS Job Mode" internal none drc
+"GUI Flow" internal none innovus
+"GUI Preset" internal none /home/vlsi/Cordic/.preset.autosave
+"Technology Name" internal none "gpdk090"
+"Technology RuleSet" internal none "default"
+"Technology Mapping File" internal none /home/vlsi/Cordic/PVS_90nm/pvtech.lib
+"Technology Rule File" internal none /home/vlsi/Cordic/.technology.rul
+"PVS Version" internal none 22.20-p031
+"Binary Name" internal none pvsgui
+"PVS Build Date" internal none "Thu Nov 17 19:06:38 PST 2022"
+"PVS Job Time" internal none 1729502579
+"DFII version" internal none 6.1.2
+"Run Directory" internal none /home/vlsi/Cordic
+"PVS Job Mode" internal none drc
+"Rule File" input text /home/vlsi/Cordic/.technology.rul
+"Cell Tree" output text /home/vlsi/Cordic/cell_tree.txt
+"Layout Top Cell" internal none cordic_pipeline
+"Layout GDSII" input none /home/vlsi/Cordic/cordic_pipeline.gds.gz
+"Job Signature" internal none IPVS_1729502578_43535
+"Do not check rules files before run" internal none ENABLED
+"Control File" input text /home/vlsi/Cordic/pvsdrcctl
+"TTE mode" internal none ENABLED
+"PVS Job Log" log text /home/vlsi/Cordic/pvsuidrc.log
+"PVS Version" internal none 22.20-p031
+"Binary Name" internal none pvsvirt
+"PVS Build Date" internal none "Thu Nov 17 19:06:38 PST 2022"
+"PVS Job Time" internal none 1729502579
+"TTE mode" internal none ENABLED
+"Cell Tree" output text /home/vlsi/Cordic/cell_tree.txt
+"PVS Job Mode" internal none drc
+"Rule File" input text /home/vlsi/Cordic/.technology.rul
+"Layout GDSII" input none /home/vlsi/Cordic/cordic_pipeline.gds.gz
+"DRC Summary" output text /home/vlsi/Cordic/cordic_pipeline.sum
+"ASCII DRC Report Database" output rdb /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii
+"Run Directory" internal none /home/vlsi/Cordic/
+"UI Data" internal none ENABLED
+"PVS Mode Info" internal none BHLBDFKDILFLMOFMKIMOLELAGFICMJDN
+"Report MaxResults" internal none 1000
+"PVS Version" internal none 22.20-p031
+"Binary Name" internal none pvs
+"PVS Build Date" internal none "Thu Nov 17 19:06:38 PST 2022"
+"PVS Job Time" internal none 1729502579

@@ -1,0 +1,17 @@
+
+/home/install/PVS222/tools.lnx86/pvs/bin/64bit/edbToEcdb Output Summary
+========================================================================
+
+Delete EDB      : N
+EDB Library dir : cordic_pipeline_73927.db
+ECDB dir        : ./
+Top Cell        : cordic_pipeline
+CDL netlist     : svdb/cordic_pipeline.net
+Layer map file  : svdb/cordic_pipeline.ecdbmap
+Text map file   : svdb/cordic_pipeline.ports
+Dependency map  : cordic_pipeline.lmap.perc
+Lvs file        : svdb/cordic_pipeline.lvsfile
+Float net file  : .cordic_pipeline.info.softchk
+threads         : 32
+debug           : 0
+Source Library  : cordic_pipeline_73927

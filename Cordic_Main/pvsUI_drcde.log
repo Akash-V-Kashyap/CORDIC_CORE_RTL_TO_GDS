@@ -1,0 +1,47 @@
+Checking out SoftShare license Phys_Ver_Sys_Results_Mgr 22.2 Qty: 1 ... succeeded (1s).
+lockFile: errno = 'Resource temporarily unavailable'
+********************************************************************************
+pvstdb 22.20-p031 64 bit (Thu Nov 17 19:06:38 PST 2022)
+Build Ref No.: 031 Production (11-17-2022) [pvs_2220]
+
+Copyright 2022 Cadence Design Systems, Inc.
+All rights reserved worldwide.
+
+Build O/S:       Linux x86_64 3.10.0-693.el7.x86_64
+Executed on:     ece3 (Linux x86_64 4.18.0-305.el8.x86_64)
+Process Id:      80806
+Starting Time:   Mon Oct 21 14:53:02 2024 (Mon Oct 21 09:23:02 2024 GMT)
+With parameters: -sf /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.index /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.pvstdb 
+********************************************************************************
+
+Waiting for write lock on /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.index.
+Obtained lock.
+
+Summary: 0 markers created.
+
+pvstdb completed.
+lockFile: errno = 'Resource temporarily unavailable'
+lockFile: errno = 'Resource temporarily unavailable'
+lockFile: errno = 'Resource temporarily unavailable'
+lockFile: errno = 'Resource temporarily unavailable'
+********************************************************************************
+pvstdb 22.20-p031 64 bit (Thu Nov 17 19:06:38 PST 2022)
+Build Ref No.: 031 Production (11-17-2022) [pvs_2220]
+
+Copyright 2022 Cadence Design Systems, Inc.
+All rights reserved worldwide.
+
+Build O/S:       Linux x86_64 3.10.0-693.el7.x86_64
+Executed on:     ece3 (Linux x86_64 4.18.0-305.el8.x86_64)
+Process Id:      80851
+Starting Time:   Mon Oct 21 14:53:18 2024 (Mon Oct 21 09:23:18 2024 GMT)
+With parameters: -sf /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.index /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.pvstdb 
+********************************************************************************
+
+Waiting for write lock on /home/vlsi/Cordic/cordic_pipeline.drc_errors.ascii.index.
+Obtained lock.
+
+Summary: 1206 markers created.
+
+pvstdb completed.
+Checking in SoftShare license Phys_Ver_Sys_Results_Mgr ... succeeded (1s).
