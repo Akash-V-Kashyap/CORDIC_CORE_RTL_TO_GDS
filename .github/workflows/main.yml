@@ -1,3 +1,6 @@
+<!-- START doctoc -->
+README.md
+<!-- END doctoc -->
 on: push
 name: TOC Generator
 jobs:
