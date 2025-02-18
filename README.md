@@ -9,10 +9,20 @@
 
 ##
 ## **Table of Contents**
-
+- [**1. Introduction to the CORDIC Algorithm**](#1-introduction-to-the-cordic-algorithm)
+- [**2. Problem Statement**](#2-problem-statement)
+  - [**2.1 Alternative Algorithms**](#21-alternative-algorithms)
+     - [**2.1.1 Taylor Series Expansion**](#211-taylor-series-expansion)
+     - [**2.1.2 Polynomial Approximation (Chebyshev Polynomials)**](#212-polynomial-approximation-chebyshev-polynomials)
+     - [**2.1.3 Lookup Tables (LUTs)**](#213-lookup-tables-luts)
+- [**3. Why CORDIC Was Chosen?**](#3-why-cordic-was-chosen)
+- [**4. Objectives**](#4-objectives)
+- [**5. Literature Survey**](#5-literature-survey)
+- [**6. Block Diagram**](#6-block-diagram)
+- [**7. Flowchart**](#7-flowchart)
 
 ##
-## **1. Introduction to the CORDIC Algorithm:**
+## **1. Introduction to the CORDIC Algorithm**
 
 The **CORDIC (COordinate Rotation Digital Computer)** algorithm, introduced by **Jack E. Volder** in **1959**, is a computational method for efficiently calculating mathematical functions such as trigonometric, logarithmic, hyperbolic, and square root operations. It is based on simple geometric principles and performs iterative calculations using basic operations like addition, subtraction, bit shifts, and comparisons. This simplicity makes it particularly well-suited for hardware implementations, especially in systems lacking multipliers or requiring cost-effective and resource-efficient designs.
 
@@ -21,15 +31,15 @@ CORDIC operates by iteratively rotating a vector in the Cartesian plane to achie
 The algorithm's iterative nature allows adjustable precision by varying the number of iterations, offering scalability to balance accuracy, speed, and power consumption. Additionally, its compatibility with fixed-point arithmetic enhances its efficiency in real-time and low-power hardware systems. CORDIC's versatility, simplicity, and adaptability have made it a cornerstone in digital computation and hardware design.
 
 ##
-## **2. Problem Statement**:
+## **2. Problem Statement**
 
 Traditional methods like Taylor series and polynomial approximations for computing functions such as sine, cosine, and logarithms are computationally intensive and hardware-inefficient. While the CORDIC algorithm offers a simpler, hardware-friendly alternative using basic operations like addition and shifts, earlier implementations lacked flexibility and optimization for modern systems.
 
 This project aims to develop an optimized and configurable CORDIC core, leveraging advanced physical design techniques to ensure high performance, scalability, and efficiency for applications in signal processing, robotics, and 3D graphics.
 
 ##
-## **2.1 Alternative Algorithms:**
-### 2.1.1 Taylor Series Expansion:
+## **2.1 Alternative Algorithms**
+### **2.1.1 Taylor Series Expansion**
 
 The Taylor series approximates functions as an infinite sum of terms derived from their derivatives at a specific point. For instance, the sine function can be expressed as a series. While highly accurate for small ranges, it requires significant computational resources due to division, multiplication, and factorial operations. This complexity and memory intensity, especially for higher-order terms, make it better suited for software applications rather than hardware like FPGAs.
 
@@ -51,7 +61,7 @@ The Taylor series provides a way to approximate functions using an infinite sum 
 - Not optimal for hardware like FPGAs due to the need for complex arithmetic operations
 
 ##
-### 2.1.2 Polynomial Approximation (Chebyshev Polynomials):
+### **2.1.2 Polynomial Approximation (Chebyshev Polynomials)**
 
 Polynomial approximations, such as Chebyshev polynomials, simplify mathematical functions into a set of polynomials with coefficients that minimize error over a specified range. These methods offer a good trade-off between precision and complexity. However, their hardware implementation requires multiple multipliers and accumulators, which increases resource utilization and latency. Though effective for specific functions, they lack the general-purpose flexibility of CORDIC, which supports trigonometric, hyperbolic, and exponential functions using a unified algorithm. Polynomial approximations, such as Chebyshev polynomials, are used to approximate functions with a series of polynomials.: These polynomials minimize the approximation error over a specified interval. 
 
@@ -71,7 +81,7 @@ where Tn(x) are the Chebyshev polynomials of the first kind.
 - Requires hardware multipliers for polynomial evaluation, which increases complexity.
 
 ##
-### 2.1.3 Lookup Tables (LUTs):
+### **2.1.3 Lookup Tables (LUTs)**
 
 Lookup tables precompute values for mathematical functions and store them in memory, allowing functions like sine, cosine, or logarithm to be retrieved instantly. This method is extremely fast and efficient in applications where memory is abundant and computation speed is critical. However, LUTs are limited by their resolution and become impractical for applications requiring high precision or a large dynamic range. CORDIC overcomes this by computing values dynamically with a small memory footprint, making it ideal for resource-constrained environments.
 Equation for Sine using LUT:
@@ -88,14 +98,14 @@ Equation for Sine using LUT:
 - Requires large amounts of memory to store function values, limiting scalability for high precision.
 - Limited by the resolution of the stored data; higher precision requires larger tables.
 
-### **Why CORDIC Was Chosen?**:
+### **3. Why CORDIC Was Chosen?**:
 
 CORDIC was chosen for its simplicity, efficiency, and versatility in hardware implementations. Unlike Taylor series or polynomial approximations, which require complex operations like multiplication and division, CORDIC relies on iterative shift-and-add operations, making it ideal for FPGA or ASIC designs with limited resources. Its scalability allows precision to be adjusted by varying the number of iterations, ensuring efficient hardware utilization.
 
 Additionally, CORDIC's single algorithmic structure can compute a wide range of functions—trigonometric, hyperbolic, logarithmic, and square root—without significant modifications. This flexibility surpasses specialized methods like Newton-Raphson or lookup tables, which are limited to specific operations. Its compatibility with fixed-point arithmetic further enhances its suitability for low-power, high-speed applications in signal processing, image processing, telecommunications, and embedded systems.
 
 ##
-### **Objectives:**
+### **4. Objectives**
 1. **Development of a Configurable CORDIC IP Core**: Design a highly adaptable CORDIC core capable of computing mathematical functions like trigonometric, logarithmic, and exponential operations with optimized hardware efficiency.
 
 2. **Physical Design and Tapeout Preparation**: Transform the Verilog RTL code into a physical design, focusing on critical steps such as floorplanning, clock tree synthesis (CTS), and static timing analysis (STA) to meet power, area, and timing constraints.
@@ -105,7 +115,7 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 4. **Customization and Flexibility**: Provide a configurable architecture to tailor the CORDIC core for diverse applications, balancing performance, area, power, and resource requirements.
 
 ##
-### **Literature Survey**:
+### **5. Literature Survey**
 | **S.No** | **Paper/Study** | **Existing Approach** | **Implementation to Our Project** |
 |------|--------------|------------------------------|-------------------------------|
 | 1. | **Volder, J.E. (1959)**	| CORDIC introduced as a method to compute trigonometric functions using only addition, subtraction, and shifting.	Introduced the foundational pipelined algorithm. | Implemented the physical design process for optimized performance and efficient resource utilization.|
@@ -115,13 +125,13 @@ Additionally, CORDIC's single algorithmic structure can compute a wide range of 
 | 5. | **NPTEL CORDIC Algorithm (2021)** | The NPTEL course covers the basic CORDIC algorithm for computing trigonometric functions and its hardware implementation.	| Our project improves upon this by creating a highly configurable CORDIC IP core, adding advanced physical design techniques and preparing the design for tape-out using industry- standard tools like Cadence Innovus and Genus. |
 
 ##
-### **Block Diagram**:
+### **6. Block Diagram**
 <p align="center">
 <img width=500 src="https://github.com/user-attachments/assets/79636560-3c64-4dc7-9365-2a073e8d06b2">
 </p>
 
 ##
-### **Flowchart**:
+### **7. Flowchart**
 <p align="center">
 <img width=500 src="https://github.com/user-attachments/assets/12fc167f-cfd6-4a2b-9a6b-8f83d0b76711">
 </p>
