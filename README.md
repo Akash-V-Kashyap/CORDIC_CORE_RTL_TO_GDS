@@ -1,6 +1,18 @@
-# Design Of A CORDIC CORE : RTL to GDS
+# **Design Of A CORDIC CORE : RTL to GDS**
 
-### **Introduction to the CORDIC Algorithm**:
+## Basic Details 🚀
+#### -  Name: Akash V Kashyap
+#### - College: Dayananda Sagar College of Engineering, Bengaluru-560078
+#### - Email ID: akashvkashyap@gmail.com
+#### - GitHub Profile: [Akash-V-Kashyap](https://github.com/Akash-V-Kashyap) 
+#### - LinkedIN Profile: [Akash V Kashyap](https://www.linkedin.com/in/akash-v-kashyap-336003261/)
+
+##
+## **Table of Contents**
+
+
+##
+## **1. Introduction to the CORDIC Algorithm:**
 
 The **CORDIC (COordinate Rotation Digital Computer)** algorithm, introduced by **Jack E. Volder** in **1959**, is a computational method for efficiently calculating mathematical functions such as trigonometric, logarithmic, hyperbolic, and square root operations. It is based on simple geometric principles and performs iterative calculations using basic operations like addition, subtraction, bit shifts, and comparisons. This simplicity makes it particularly well-suited for hardware implementations, especially in systems lacking multipliers or requiring cost-effective and resource-efficient designs.
 
@@ -9,15 +21,15 @@ CORDIC operates by iteratively rotating a vector in the Cartesian plane to achie
 The algorithm's iterative nature allows adjustable precision by varying the number of iterations, offering scalability to balance accuracy, speed, and power consumption. Additionally, its compatibility with fixed-point arithmetic enhances its efficiency in real-time and low-power hardware systems. CORDIC's versatility, simplicity, and adaptability have made it a cornerstone in digital computation and hardware design.
 
 ##
-### **Problem Statement**:
+## **2. Problem Statement**:
 
 Traditional methods like Taylor series and polynomial approximations for computing functions such as sine, cosine, and logarithms are computationally intensive and hardware-inefficient. While the CORDIC algorithm offers a simpler, hardware-friendly alternative using basic operations like addition and shifts, earlier implementations lacked flexibility and optimization for modern systems.
 
 This project aims to develop an optimized and configurable CORDIC core, leveraging advanced physical design techniques to ensure high performance, scalability, and efficiency for applications in signal processing, robotics, and 3D graphics.
 
 ##
-### **Alternative Algorithms:**
-### Taylor Series Expansion:
+## **2.1 Alternative Algorithms:**
+### 2.1.1 Taylor Series Expansion:
 
 The Taylor series approximates functions as an infinite sum of terms derived from their derivatives at a specific point. For instance, the sine function can be expressed as a series. While highly accurate for small ranges, it requires significant computational resources due to division, multiplication, and factorial operations. This complexity and memory intensity, especially for higher-order terms, make it better suited for software applications rather than hardware like FPGAs.
 
@@ -39,7 +51,7 @@ The Taylor series provides a way to approximate functions using an infinite sum 
 - Not optimal for hardware like FPGAs due to the need for complex arithmetic operations
 
 ##
-### Polynomial Approximation (Chebyshev Polynomials):
+### 2.1.2 Polynomial Approximation (Chebyshev Polynomials):
 
 Polynomial approximations, such as Chebyshev polynomials, simplify mathematical functions into a set of polynomials with coefficients that minimize error over a specified range. These methods offer a good trade-off between precision and complexity. However, their hardware implementation requires multiple multipliers and accumulators, which increases resource utilization and latency. Though effective for specific functions, they lack the general-purpose flexibility of CORDIC, which supports trigonometric, hyperbolic, and exponential functions using a unified algorithm. Polynomial approximations, such as Chebyshev polynomials, are used to approximate functions with a series of polynomials.: These polynomials minimize the approximation error over a specified interval. 
 
@@ -59,7 +71,7 @@ where Tn(x) are the Chebyshev polynomials of the first kind.
 - Requires hardware multipliers for polynomial evaluation, which increases complexity.
 
 ##
-### Lookup Tables (LUTs):
+### 2.1.3 Lookup Tables (LUTs):
 
 Lookup tables precompute values for mathematical functions and store them in memory, allowing functions like sine, cosine, or logarithm to be retrieved instantly. This method is extremely fast and efficient in applications where memory is abundant and computation speed is critical. However, LUTs are limited by their resolution and become impractical for applications requiring high precision or a large dynamic range. CORDIC overcomes this by computing values dynamically with a small memory footprint, making it ideal for resource-constrained environments.
 Equation for Sine using LUT:
@@ -354,6 +366,14 @@ $𝑚𝑜𝑛𝑖𝑡𝑜𝑟("𝑇𝑖𝑚𝑒: %0𝑡 | 𝑋_𝑖𝑛: %0𝑑 
 𝑒𝑛𝑑
 𝑒𝑛𝑑𝑚𝑜𝑑𝑢𝑙𝑒
 ```
+<p align="center">
+<img width=1000 src="https://github.com/user-attachments/assets/31b58d3b-7ef5-4b7a-addb-a072965c3c71">
+</p>
+
+<p align="center">
+<img width=1000 src="https://github.com/user-attachments/assets/16a71e01-3a36-4295-9507-fd492c553594">
+</p>
+
 ### **Functional Verification using Cadence NCSim:**
 #### Commands to visualize the Waveforms in Cadence NCSim
 
@@ -388,8 +408,21 @@ a)  Select the <testbench module name> instance and click SEND the SELECTED SIGN
 b)  In the waveform window press RUN.
 c)  Now you will be able to visualize the waveforms
 ```
+<p align="center">
+<img width=1000 src="https://github.com/user-attachments/assets/6902db7f-f71e-4b95-87de-eb98f28c6237">
+</p>
+
 ##
 ### **Synthesis**
+
+The synthesis process in Cadence Genus transforms RTL code (written in Verilog or VHDL) into a gate-level representation for hardware implementation. Key inputs include:
+
+- **RTL Code**: Defines the logic and functionality of the design.  
+- **Constraints Files (e.g., *SDC*)**: Specify timing, clock definitions, input-output relationships, and physical constraints to meet performance and area requirements.  
+- **Technology Library Files**: Provide details about available cells, including delays, area, and power for the target fabrication process (e.g., 7nm or 65nm).  
+- **Power Constraints**: Optional files to guide power optimization.  
+
+These inputs enable Cadence Genus to optimize the design for timing, area, and power before advancing to implementation.
 
 ### **SDC Script:**
 - Type the following script and save in a file named "cordic.sdc"
@@ -446,3 +479,726 @@ gedit cordic.sdc //Type the SDC Script in this file
 genus ./run.tcl
 gui_show
 ```
+
+<p align="center">
+<img width=800 src="https://github.com/user-attachments/assets/8a00ae87-97f3-4ed7-a2b3-9ef8adeaf577">
+</p>
+
+<p align="center">
+<img width=800 src="https://github.com/user-attachments/assets/9a4cd378-5081-415c-baee-8b70ec365f26">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/beb374af-0eea-433d-b41c-a5cd60fe5593">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/867fe747-19bc-43ca-b8fb-1cb3f8d895a1">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/4502372e-d259-4515-a49a-a8e0eda76e6d">
+</p>
+
+##
+### **Physical Design:**
+
+<p align="center">
+<img width=800 src="https://github.com/user-attachments/assets/491c842e-0dec-4a69-a2a8-315b0cb611a2">
+</p>
+
+The physical design process, carried out using Cadence Innovus, converts the synthesized netlist and constraints into a physical chip layout. Key tasks include floorplanning, cell placement, clock tree synthesis, routing, and optimization for performance, power, and area. 
+
+Using the Verilog netlist and SDC files from Genus, Innovus ensures the design meets all timing and design constraints, preparing it for tape-out and fabrication. The process begins with verifying the digital design and testbench (in Verilog) using functional simulation tools like Incisive Simulator (e.g., *ncvlog, ncelab, ncsim*). After verifying functionality, the design undergoes synthesis to generate the gate-level netlist, Block-Level SDC, Liberty files (.lib), and LEF files. 
+
+### **Inputs for Physical Design**
+  1. **Gate Level Netlist:** This is the output of the synthesis stage and serves as the foundation for physical implementation. 
+  2. **Block Level SDC:** The timing constraints file generated during synthesis to guide the design implementation. 
+  3. **Liberty File (.lib):** Captures timing, power, and functional characteristics of standard cells. 
+  4. **LEF Files (Layer Exchange Format):** Contains abstract physical information about standard cells, including pin positions, layout layers, and blockages.
+
+### **Outputs from Physical Design**
+  1. **GDSII File:** The final physical design in Graphical Data Stream format for fabrication. 
+  2. **SPEF (Standard Parasitic Exchange Format) and SDF (Standard Delay Format):** Used for post-layout timing and parasitic extraction verification.
+
+### **Initiating Innovus**
+1. Ensure the synthesis is complete for the target design and open a terminal in the 
+corresponding workspace. 
+2. Start the Cadence tools and use the command: `innovus` and press Enter. 
+3. The Innovus GUI opens, and the terminal enters the Innovus command prompt, ready for tool-specific commands.
+
+### Importing Design in Cadence Innovus
+
+The design import process in Innovus involves loading all the mandatory inputs, either through script files (e.g., `.globals`, `.view`, `.tcl`) or via the GUI. Below is a step-by-step guide to importing a design:
+
+### **1. Mandatory Input Files**
+- **Netlist:** Describes the design's gate-level logic.  
+- **LEF Files:** Physical layout information for standard cells, obtained from the foundry (e.g., `/home/install/FOUNDRY/digital/90nm/dig/lef`).  
+- **Liberty Files (`.lib`):**
+  - **Slow.lib:** Represents the PVT (Process, Voltage, Temperature) corner with slow charge movement (Maximum Delay, Worst Performance).  
+  - **Fast.lib:** Represents the PVT corner with fast charge movement (Minimum Delay, Best Performance).  
+- **SDC (Synopsys Design Constraints):** Specifies timing constraints like clock definitions and reset.  
+
+The `.lib` and SDC files are combined to analyze:
+  - **Setup Timing:** Worst-case delay.  
+  - **Hold Timing:** Best-case delay.
+
+### **2. GUI Workflow for Design Import**
+1. **Open Innovus Tool:**  
+   Navigate to **File → Import Design** in the GUI.  
+   
+2. **Load Files:**
+   - **Netlist:** Browse for the file and set "Top cell: Auto Assign."  
+   - **LEF Files:** Select from the foundry directory.  
+   
+3. **Create Power Supply Pins:**  
+   Define **VDD** and **VSS** pins.  
+
+4. **Load Liberty and SDC Files:**
+   - Select the **"Create Analysis Configuration"** option at the bottom.  
+   - The **MMMC Browser** window opens.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/ffa00fde-194f-428c-a828-8d9ad79f2356">
+</p>
+
+5. **Add MMMC Objects:**
+   - **Library Sets:** Add `.lib` files (e.g., `slow.lib` and `fast.lib`) with appropriate labels.  
+   - **RC Corners:** Define temperature values and include Cap Table/RC Tech files from the foundry.  
+   - **Delay Corners:** Combine library sets with RC corners.  
+   - **Constraints:** Load the SDC file under MMMC "Constraints."
+
+6. **Create Analysis Views:**  
+   - Combine **SDC** and **Delay Corners** to form "Best" and "Worst" analysis views.  
+   - Assign:
+     - **Best View** → Hold Timing  
+     - **Worst View** → Setup Timing  
+
+7. **Save the Configuration:**  
+   - Click **"Save & Close"** to save the script (with a `.view` or `.tcl` extension).  
+   - Return to the **Import Design** window and click **OK** to load the design.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/6dd6ae53-f9cb-4fe1-a554-d3098d77288c">
+</p>
+
+8. **Save Defaults:**  
+   Save the settings as `Default.globals` to reload them easily in future sessions.
+
+### **3. Verify the Design Import**
+- A rectangular or square **Core Area** should appear in the GUI upon successful import.  
+  - If not, check the terminal or log file for errors.  
+- **Core Area Details:**
+  - **Standard Cell Rows:** Horizontal rows running across the core width.  
+  - Alternate rows are flipped to indicate **VDD** and **VSS** power rails, forming the "Flipped Standard Cell Rows" setup.
+ 
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/c733c6d7-7dbb-4478-b5d6-faa65bfe79c4">
+</p>
+
+### **Floorplan in Cadence Innovus**
+
+The floorplanning process defines the chip's physical structure and optimizes the layout for performance and area. Below are the key steps involved:
+
+### **Steps in Floorplanning**
+1. **Aspect Ratio:**  
+   - Defines the ratio of vertical height to horizontal width of the core.  
+   - Adjusted to balance the core shape and placement efficiency.
+
+2. **Core Utilization:**  
+   - Specifies the percentage of the core area to be used for floorplanning.  
+   - Higher utilization means less unused area but may lead to congestion.
+
+3. **Channel Spacing:**  
+   - Distance between the core boundary and the I/O boundary.  
+   - Adjusted to ensure proper pin placement and routing space.
+
+#### **Workflow**
+1. Navigate to **FloorPlan → Specify Floorplan** in the Innovus GUI.  
+2. Modify/Add values for:
+   - **Aspect Ratio**  
+   - **Core Utilization**  
+   - **Channel Spacing**  
+
+3. Upon adjusting these parameters, the **Core Area** is recalculated and modified accordingly.
+
+4. **Unassigned Pins:**  
+   - Initially, unassigned pins appear as a yellow patch in the bottom-left corner of the core.  
+   - These pins must be placed along the **I/O Boundary**, ensuring proper alignment with standard cells and gates.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/01beb9e2-203c-4ea2-abb0-641aae3151d4">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/b50e09cd-b01e-4e29-8f34-bd3e3aeb4c67">
+</p>
+
+### **Power Planning in Cadence Innovus**
+
+Power planning ensures that the design receives a reliable and efficient power supply across the entire chip. Below are the key steps involved:
+
+### **Steps in Power Planning**
+
+1. **Connect Global Nets:**  
+   - Create two pins: one for **VDD** (power) and one for **VSS** (ground).  
+   - Connect these pins to the global nets defined in the `.globals` file or power/ground nets.  
+   - **Workflow:**
+     - Navigate to **Power → Connect Global Nets**.  
+     - Use **"Add to List"** to create the pins and connect them to the corresponding global nets.  
+     - Click **"Apply"** to enforce the connections, then close the window.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/3f8d1dae-290d-4457-8134-1fe0d249703d">
+</p> 
+
+2. **Adding Power Rings:**  
+   - Power rings are added around the core boundary to supply power efficiently from distant power sources.  
+   - **Workflow:**
+     - Go to **Power → Power Planning → Add Ring**.  
+     - Select global nets (e.g., VDD, VSS) from the browse option or type their names (case-sensitive).  
+     - Use the highest metal layers for horizontal (H) and vertical (V) segments, as these have the highest width and lowest resistance.  
+     - Set **Offset: Center in Channel**, and update the **minimum width** and **spacing**.  
+     - Click **OK** to create the rings.
+    
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/53c75838-bbf0-43c3-b87f-0963b199e218">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/6105efde-a45a-4a8e-bccc-9f5a69911ddf">
+</p>
+
+3. **Adding Power Strips:**  
+   - Power strips are added across the core boundary to distribute power efficiently to cells within the core.  
+   - **Factors to Consider:**  
+     - **Nets** (e.g., VDD, VSS).  
+     - **Metal Layers and Directions:** Assign appropriate horizontal (H) or vertical (V) metals.  
+     - **Width and Spacing:** Update values based on foundry specifications.  
+     - **Set-to-Set Distance:** Calculated as \( ( \text{Minimum Width of Metal} + \text{Minimum Spacing} ) \times 2 \).  
+   - Use the same process as power rings to create power strips.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/d37e1037-29a7-48cf-911f-69cb0f17d372">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/13e1f1b0-f2f3-41ac-8cc6-a713bcb9ba01">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/8fc5d666-c751-4534-b25b-7996fb1d8391">
+</p>
+
+4. **Special Routing:**  
+   - Connects the highest metals (e.g., Metal 9 or 8) to the lowest metal (Metal 1), which supplies power to standard cells.  
+   - This is achieved by stacking vias across metal layers.  
+   - **Workflow:**
+     - Navigate to **Route → Special Route → Add Nets → OK**.  
+     - After completing the special route, the standard cell rows will be color-coded to indicate Metal 1 connections.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/ff20e1d1-e17b-4a0f-8816-1dd35e5dd8db">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/39f31db5-7ce7-430f-bead-b27c60120e9b">
+</p>
+
+### **Outcome**
+The complete power planning process ensures:  
+- Efficient power distribution across the chip.  
+- Reliable connections from global nets to standard cells.  
+- A well-constructed power mesh with sufficient power for every standard cell to operate smoothly.
+
+### **Pre-Placement**
+
+Pre-placement involves adding specific physical cells to ensure structural integrity and avoid electrical issues before placing the standard cells. The two key physical cells added are **End Caps** and **Well Taps**.
+
+### **1. End Caps**
+- **Purpose:**  
+  - End Caps are physical cells placed at the left and right boundaries of the core to prevent standard cells from moving outside the boundary.  
+  - They act as blockages and maintain the design's structural integrity.  
+
+- **Workflow:**  
+  - Navigate to **Place → Physical Cell → Add End Caps**.  
+  - Select **"FILL"** from the available list.  
+    - Higher **FILL** values correspond to wider cells.  
+  - End Caps will appear below the Power Mesh after placement.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/c214c1db-1abb-4afa-9d60-9d761c230af2">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/0ce1b6ec-e8c1-40b1-906e-dade8fb16431">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/ebc4cf56-7e77-40b0-b9be-15b0c8b83ac2">
+</p>
+ 
+### **2. Well Taps**
+- **Purpose:**  
+  - Well Taps function as shunt resistances to prevent latch-up effects by connecting the substrate or wells to power or ground.  
+
+- **Workflow:**  
+  - Go to **Place → Physical Cell → Add Well Tap**.  
+  - Select **"FILL X"**, where `X` determines the strength of the fill (e.g., 1, 2, 4, etc.).  
+  - Specify the **Distance Interval** (typically between 30–45 μm).  
+  - Click **OK** to complete the process.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/09010e3b-e5e6-455c-a60e-77ef5b5a58f3">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/b2ea15aa-15de-461a-ba21-6c0e4370188a">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/99d6c56d-cf35-4e4f-929d-9b1c05570e93">
+</p>
+
+### **Outcome**
+After adding End Caps and Well Taps:  
+- The **End Caps** secure the boundaries of the design.  
+- The **Well Taps** ensure electrical stability by minimizing latch-up risks.  
+These steps prepare the core for standard cell placement while maintaining reliability and structural consistency.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/3e101787-4464-4ddc-a093-e3300e829ae1">
+</p>
+
+### **Placement in Cadence Innovus**
+
+Placement involves arranging standard cells and I/O pins within the core area to optimize timing, reduce power consumption, and minimize wirelength. This step ensures that communicating cells are placed close together to improve performance and avoid congestion.
+
+### **Key Steps in Placement**
+
+1. **Place Standard Cells and Pins:**  
+   - Navigate to **Place → Place Standard Cell → Run Full Placement**.  
+   - Enable **'Place I/O Pins'** in the mode settings and click **OK**.  
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/aa9dc88b-1eff-413f-ade4-3a6a27fa629a">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/312c7c09-8311-4789-81bf-b477e482b2d0">
+</p>
+
+2. **Placement Optimization:**  
+   - Standard cells are positioned based on their connectivity to minimize net lengths.  
+   - The tool verifies constraints such as minimum area, spacing, and alignment with the power grid.  
+
+3. **Layer Visibility:**  
+   - Use the **Layer Tab** on the right to toggle layer visibility, which helps visualize the placement and ensure proper alignment.
+
+### **Outcome**
+Proper placement ensures:  
+- Shorter net lengths for better timing results.  
+- Balanced power, area, and timing.  
+- A design ready for the next stage: routing.
+
+### **Report Generation and Optimization in Cadence Innovus**
+
+Generating reports and optimizing the design are critical steps in analyzing the design's performance and ensuring it meets timing, area, and power constraints. Below are the steps for report generation and optimization:
+
+### **1. Timing Report**
+- Navigate to **Timing → Report Timing**.  
+- Set the following parameters:  
+  - **Design Stage:** Pre-CTS  
+  - **Analysis Type:** Setup  
+- Click **OK** to generate the timing report.  
+- The **Timing Report Summary** will be displayed on the terminal.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/d25408c5-05ec-4512-be26-2009d0fbf685">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/7820d7b7-2ff4-40dc-9e46-4686e631a73f">
+</p>
+
+### **2. Area Report**
+- Use the following command in the terminal:  
+  ```bash
+  report_area
+  ```
+
+### **3. Power Report**
+- Use the following command in the terminal:  
+  ```bash
+  report_power
+  ```
+
+### **4. Design Optimization**
+- If there are violating paths, the design can be optimized:  
+  - Go to **ECO → Optimize Design**.  
+  - Set the following parameters:  
+    - **Design Stage:** Pre-CTS  
+    - **Optimization Type:** Setup  
+  - Click **OK** to run the optimization.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/cfc0cfb2-e9db-4658-aa22-c42153967d7f">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/92dbe11a-61db-4f1c-8d20-c1d854f9a373">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/ad809f43-c388-4cf0-92be-f8f85b722492">
+</p>
+
+- After optimization, the updated timing report will be displayed on the terminal.  
+- Use the above commands to regenerate timing, area, and power reports to compare pre- and post-optimization results.
+
+### **Outcome**
+- This process optimizes the design for timing, area, and power while resolving any violations.  
+- Comparing the reports ensures that improvements are quantified and design constraints are met effectively.
+
+### **Clock Tree Synthesis (CTS) in Cadence Innovus**
+
+Clock Tree Synthesis (CTS) ensures that the clock signal reaches all registers (flip-flops) simultaneously or with minimal skew to maintain proper communication across the design.
+
+### **Steps for CTS**
+
+1. **Clock Tree Generation:**  
+   - Use a pre-written script to build the clock tree.  
+   - Source the script through the terminal to execute it.
+  
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/73cb38d5-c9fa-4987-b52d-f8d86ae947f7">
+</p>
+
+2. **View and Debug Clock Tree:**  
+   - Navigate to **Clock → CCOpt Clock Tree Debugger → OK** to build and visualize the clock tree.  
+   - In the visual representation:  
+     - **Red boxes** indicate the clock pins of flip-flops.  
+     - **Yellow pentagon** represents the clock source.
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/f7c2f1ac-0f8a-4c98-afd2-c19f8e738d2f">
+</p>
+
+3. **Clock Tree Components:**  
+   - The clock tree consists of **clock buffers** and **clock inverters** that amplify and stabilize the clock signal as it propagates through the design.
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/f0d00fec-30f4-46aa-bf04-1350cae7a124">
+</p>
+
+### **Outcome**
+The CTS process ensures a balanced clock distribution network, minimizing skew and enabling synchronized operation across the design.  
+
+### **Report Generation and Design Optimisation:**
+-CTS Stage adds real clock into the design and hence "Hold" Analysis also becomes prominent. Hence, Optimisation can be done for both Setup and Hold, Timing Reports are to be generated for Setup and Hold individually.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/46e3d49d-7060-4317-87b8-36edde91e2f5">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/5e7ed423-cccc-4163-a1f4-5e177963c694">
+</p>
+
+### **Routing in Cadence Innovus** 
+
+Routing is the process of creating actual physical connections (metal routes) between the design components. This step ensures that logical connectivity is translated into real metal wires, avoiding issues such as opens, shorts, crosstalk, or antenna violations.  
+
+### **Steps for Routing**
+
+1. **Run Routing:**  
+   - Go to **Route → Nano Route → Route**.  
+   - Enable **Timing Driven** and **SI Driven** options to optimize for timing and signal integrity.  
+   - Click **OK** to execute the routing process.
+
+2. **Design Optimization Post-Route:**  
+   - After routing, use the terminal or GUI to run **Design Optimization** to further improve the physical design.  
+
+3. **Set Analysis Mode:**  
+   - As an alternative to the `setAnalysisMode` command in the terminal, use the GUI:  
+     - Navigate to **Tools → Set Mode → Set Analysis Mode**.  
+     - Enable **On-Chip Variation** and **CPPR (Clock Path Pessimism Removal)** for improved analysis accuracy.
+
+4. **Generate Reports:**  
+   - Post-routing, generate timing, area, and power reports using the same methods as in the earlier Design Optimization phase.  
+
+### **Outcome**  
+The routing process translates logical connections into reliable physical connections, ensuring the design is free of routing-related violations and ready for final verification.
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/e3d894d4-597c-4157-9293-85a133d9d83d">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/7ccf4f98-4e42-4927-a6f7-b907d37ef634">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/313c1daa-043e-435b-baea-ff1312e26a59">
+</p>
+
+### **Saving the Database in Cadence Innovus**
+
+Proper saving of design files is crucial to preserve the progress and ensure compatibility with subsequent design stages.
+
+### **Steps to Save the Database**
+
+1. **Save the Design:**  
+   - Go to **File → Save Design**.  
+   - Select **Data Type: Innovus**.  
+   - Enter the desired file name as `<DesignName>.enc`.  
+   - Click **OK**.
+
+2. **Save the Netlist:**  
+   - Navigate to **File → Save → Netlist**.  
+   - Specify the file name as `<NetlistName>.v`.  
+   - Click **OK**.
+
+3. **Save the GDS File:**  
+   - Go to **File → Save → GDS/OASIS**.  
+   - Enter the desired file name as `<FileName>.gds`.  
+   - Click **OK**.
+
+### **Outcome**  
+The design, netlist, and GDS files are saved in their respective formats, enabling seamless continuation of the design flow and preparation for tape-out.
+
+### Physical Verification: Capturing DRC and LVS  
+
+Physical verification ensures that the design meets all fabrication and connectivity rules before proceeding to manufacturing. This process includes **Design Rule Check (DRC)** and **Layout Versus Schematic (LVS)**.  
+
+### **Design Rule Check (DRC)**  
+
+**Inputs Required for DRC:**  
+1. **Technology Library** and **Rule Sets**: Define the fabrication rules for the specific technology node.  
+2. **GDS Files of Standard Cells**: Available at `/home/install/FOUNDRY/90nm/dig/gds` for the 90nm technology node.  
+
+**Outputs from DRC:**  
+1. **DRC Violation Report**  
+2. Optional: **Physical Netlist**  
+
+**Steps to Run DRC:**  
+1. From the Innovus GUI, go to **PVS → Run DRC** to open the DRC Submission Form.  
+2. Specify the **Run Directory** where logs, reports, and related files will be saved.  
+3. Under the **Rules** tab:  
+   - Load the **Technology Library** corresponding to your design's technology node.  
+   - The rule set and fabrication rules will automatically be read into the tool.  
+4. Add the **GDS Files** of all standard cells.  
+5. Provide a name and location for the output report.  
+6. Click **Submit** to start the DRC.  
+
+**Post-DRC:**  
+- The tool generates a list of DRC errors.  
+- Errors are displayed in a dedicated window, and their locations can be highlighted and zoomed in for detailed analysis.  
+- Save the DRC run as a **Preset File** for reusability.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/d166d4a9-0538-42c0-8934-387fb042526f">
+</p>
+
+#### **Layout Versus Schematic (LVS)**  
+
+**Inputs Required for LVS:**  
+1. **Technology Library**  
+2. **GDS Files of Standard Cells**  
+3. **SPICE Netlist** of all standard cells (provided by the vendor).  
+
+**Outputs from LVS:**  
+1. **LVS Match/Mismatch Report**  
+
+**Steps to Run LVS:**  
+1. From the Innovus GUI, go to **PVS → Run LVS** to open the LVS Submission Form.  
+2. Specify the **Run Directory** and optionally provide a log file name and path.  
+3. Load the following under their respective tabs:  
+   - **Technology Library**  
+   - **GDS Files**  
+   - **SPICE Netlist**  
+
+4. Submit the LVS run to check for connectivity between the layout and the schematic.
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/da8a2237-2e73-45d1-b780-833af202134a">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/de276d57-cd51-4c46-b525-d3a33d6f7494">
+</p>
+
+**StreamOut Command (Optional):**  
+If required, you can create a GDS file and Stream Out file using the following methods:  
+- GUI: **File → Save → GDS/Oasis**  
+- Command:  
+   ```bash
+   streamOut <GDSFileName>.gds -streamOut <streamOut>.map
+   ```  
+
+**Conclusion:**  
+Physical verification through DRC and LVS ensures that the design meets all manufacturing rules and matches the schematic's intent. This step is essential to avoid costly fabrication errors.
+
+##
+## **Additional Checks done to verify design:**
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/edaed946-b53f-4334-984f-bba97b443911">
+</p> 
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/71f93998-9cdb-42b6-bb19-7fe1152e87bb">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/a53fc256-c202-42cc-827d-3c8e75e6514b">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/1dca33e6-152b-4d1a-a527-3b942254e7f9">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/a89d71dc-38bf-49f3-82b8-7e8e74814a37">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/46dc8023-c662-4118-a2e2-96d9a0ee5d5b">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/9a3c8b5c-4833-4d69-bbe1-833c335fe00b">
+</p>
+
+##
+## **Final Project Outcome:**
+
+### **Power Report:**
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/ec635b52-f684-4997-b44c-7f5253cb2d49">
+</p>
+
+### **Area Report:**
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/05ba0155-59bd-4be6-a0c6-400afa58962b">
+</p>
+
+### **Final GSII Layout:**
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/1e0d8847-3750-4668-89c0-27820bfa9d49">
+</p>
+
+### **3D View:**
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/fbd5eae8-b5a5-44cb-8da4-6cf542226489">
+</p>
+
+<p align="center">
+<img width=500 src="https://github.com/user-attachments/assets/5e4fc91d-0f43-4a5d-8a7a-c65e51b57796">
+</p>
+
+##
+## **Application, Advantages, and Limitations**
+
+### **Applications**  
+The CORDIC algorithm is widely used across various domains due to its iterative and efficient computation. Key applications include:  
+
+1. **Digital Signal Processing (DSP):**  
+   - Computes FFT for spectral analysis and filter design.  
+   - Used in adaptive filtering and signal modulation processes.  
+
+2. **Graphics and Image Processing:**  
+   - Handles 2D/3D geometric transformations like rotation and scaling.  
+   - Essential for real-time rendering in graphics and animation.  
+
+3. **Communication Systems:**  
+   - Supports QAM and PSK modulation/demodulation by phase shift calculation.  
+   - Widely used in baseband signal processing and software-defined radios.  
+
+4. **Navigation and Control Systems:**  
+   - Performs angle calculations for GPS and trajectory computations in robotics.  
+   - Used in real-time motion control systems.  
+
+5. **Embedded Systems:**  
+   - Executes trigonometric and exponential functions on microcontrollers/DSPs.  
+   - Optimized for systems lacking hardware multipliers.  
+
+6. **Medical Imaging:**  
+   - Applied in CT and MRI image reconstruction algorithms.  
+
+### **Advantages**  
+
+1. **Hardware Efficiency:**  
+   - Eliminates multipliers using only shift-and-add operations, making it ideal for FPGA and ASIC implementations.  
+
+2. **Computational Versatility:**  
+   - Supports trigonometric, hyperbolic, and exponential functions in fixed-point or real-time applications.  
+
+3. **Scalability:**  
+   - Easily adaptable for different precision and word lengths.  
+
+4. **Low Power Consumption:**  
+   - Reduces hardware complexity, lowering power requirements.  
+
+5. **Real-Time Performance:**  
+   - High-speed convergence for latency-critical applications like DSP and communication systems.  
+
+### **Limitations**  
+
+1. **Precision Issues:**  
+   - Limited accuracy due to truncation and rounding errors in fixed-point implementations.  
+
+2. **Slow Convergence for Small Angles:**  
+   - Less efficient for small-angle computations compared to direct methods.  
+
+3. **Scaling Overhead:**  
+   - Pre-scaling and post-scaling increase computation time.  
+
+4. **Modern Processor Constraints:**  
+   - May underperform compared to multiplier-based algorithms on systems with advanced floating-point units.  
+
+5. **Range Restrictions:**  
+   - Input values must be confined to specific ranges without additional modifications.  
+
+The CORDIC algorithm is invaluable for high-performance applications but requires consideration of its trade-offs in precision, range, and modern hardware efficiency.
+
+##
+## **Conclusion**  
+
+The CORDIC algorithm was successfully implemented and synthesized in this project, demonstrating its ability to perform efficient trigonometric computations with minimal hardware. Using tools like Cadence Genus and Innovus, the RTL-to-GDS flow was completed, and the GDS file was generated, marking readiness for fabrication. This implementation highlights the algorithm’s suitability for low-power, resource-constrained environments and its broad applicability in areas such as signal processing, robotics, and telecommunications, laying a strong foundation for future advancements in computational hardware systems.
+
+##
+## **Future Scope**
+The CORDIC algorithm, with its multiplier-less architecture, has significant potential for scaling into advanced computing systems and emerging technologies. Future enhancements can focus on:
+
+1. **Algorithm Optimization:**
+- Improve convergence rate and precision for small angles or complex functions using hybrid or pre-computation techniques.
+
+2. **Hardware Acceleration:**
+- Explore implementation on advanced hardware platforms like RISC-V processors, GPUs, and neuromorphic computing for specialized tasks.
+
+3. **AI and ML Integration:**
+- Leverage the CORDIC algorithm for matrix operations, feature extraction, and embedded AI solutions in IoT and edge computing.
+
+4. **FPGA and ASIC Applications:**
+- Adapt the design for dynamic reconfigurable systems and industry-grade ASICs, targeting high-throughput domains like automotive, aerospace, and 5G communication.
+
+5. **Precision and Speed Enhancements:**
+- Develop approaches for higher precision while maintaining low latency, making the algorithm suitable for critical applications such as medical imaging and aerospace navigation.
+
+As technology advances, the CORDIC algorithm’s efficiency in low-power and high-performance systems positions it as a key component in future innovations across multiple industries.
+
+##
+## **References**
+
+| **S.No.** | **Reference**                                                                                                         | **Details**                                                                                                                                                     |
+|-----------|---------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1         | Volder, J. E., “The CORDIC Trigonometric Computing Technique,” IRE Transactions on Electronic Computers, vol. EC-8, no. 3, pp. 330–334, 1959.        | Original paper introducing the CORDIC algorithm.                                                                                                                |
+| 2         | Andraka, R., “A Survey of CORDIC Algorithms for FPGA-Based Computers,” Proceedings of the 1998 ACM/SIGDA Sixth International Symposium on Field Programmable Gate Arrays, Monterey, CA, USA, pp. 191–200, 1998. | Survey on FPGA implementations of CORDIC algorithms.                                                                                                           |
+| 3         | Parhami, B., *Computer Arithmetic: Algorithms and Hardware Designs*, 2nd ed., Oxford University Press, 2010.                                              | Comprehensive book on computer arithmetic and hardware designs.                                                                                                |
+| 4         | NPTEL, “Digital Signal Processing,” [Online]. Available: [NPTEL DSP Course](https://nptel.ac.in/courses/108/105/108105113/)                            | Online course material on digital signal processing.                                                                                                            |
+| 5         | Smith, S. W., *The Scientist and Engineer's Guide to Digital Signal Processing*, California Technical Publishing, 1997.                                 | Guide on digital signal processing for scientists and engineers.                                                                                               |
+| 6         | Baker, R. J., *CMOS: Circuit Design, Layout, and Simulation*, 3rd ed., Wiley-IEEE Press, 2010.                                                           | Book focusing on CMOS circuit design and simulation techniques.                                                                                                |
+| 7         | Cadence Design Systems, “Innovus User Guide,” [Online]. Available: [Cadence Innovus](https://www.cadence.com)                                           | User guide for Innovus physical design tool.                                                                                                                   |
+| 8         | IEEE Standard 1076-1993, *IEEE Standard VHDL Language Reference Manual*, IEEE, 1993.                                                                    | Standard documentation for VHDL language specifications.| 
+
