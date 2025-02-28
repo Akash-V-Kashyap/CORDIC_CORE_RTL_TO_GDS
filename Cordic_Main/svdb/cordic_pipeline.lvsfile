@@ -1,0 +1,143 @@
+;| version 1
+text text_Metal1_p attach Metal1_p
+text text_Metal2_p attach Metal2_p
+text text_Metal3_p attach Metal3_p
+text text_Metal4_p attach Metal4_p
+text text_Metal5_p attach Metal5_p
+text text_Metal6_p attach Metal6_p
+text text_Metal7_p attach Metal7_p
+text text_Metal8_p attach Metal8_p
+text text_Metal9_p attach Metal9_p
+text text_metal1_conn attach metal1_conn
+text text_metal2_conn attach metal2_conn
+text text_metal3_conn attach metal3_conn
+text text_metal4_conn attach metal4_conn
+text text_metal5_conn attach metal5_conn
+text text_metal6_conn attach metal6_conn
+text text_metal7_conn attach metal7_conn
+text text_metal8_conn attach metal8_conn
+text text_metal9_conn attach metal9_conn
+connect Bondpad metal9_conn by bp_tap
+connect Metal9_p metal9_conn by Metal9_v
+connect metal9_conn metal8_conn by Via8
+connect Metal8_p metal8_conn by Metal8_v
+connect metal8_conn metal7_conn by Via7
+connect Metal7_p metal7_conn by Metal7_v
+connect metal7_conn metal6_conn by Via6
+connect Metal6_p metal6_conn by Metal6_v
+connect metal6_conn metal5_conn by Via5
+connect Metal5_p metal5_conn by Metal5_v
+connect metal5_conn metal4_conn by Via4
+connect Metal4_p metal4_conn by Metal4_v
+connect metal4_conn metal3_conn by Via3
+connect Metal3_p metal3_conn by Metal3_v
+connect metal3_conn CapMetal by via2_cap
+connect metal3_conn metal2_conn by via2_out_capInd
+connect Metal2_p metal2_conn by Metal2_v
+connect metal2_conn metal1_conn by Via1
+connect metal2_conn ind_term1 by ind_term1_tap
+connect metal2_conn ind_term2 by ind_term2_tap
+connect Metal1_p metal1_conn by Metal1_v
+connect metal1_conn poly_conn by cont_poly
+connect metal1_conn pdiff_conn by cont_pdiff
+connect metal1_conn ndiff_conn by cont_ndiff
+connect metal1_conn npn_emit by cont_emit
+connect metal1_conn npn_base by cont_base
+connect metal1_conn npn_coll by cont_coll
+sconnect pdiff_conn psubstrate by ptap
+sconnect ndiff_conn nwell_conn by ntap
+sconnect nwell_conn Nburied by nb_tap
+model=mos[nmos1v],nmos1v
+element mos[nmos1v] _nmos_12 poly_conn ndiff_conn psubstrate
+model=mos[nmos1v_hvt],nmos1v_hvt
+element mos[nmos1v_hvt] _nmos_12_hvt poly_conn ndiff_conn psubstrate
+model=generic[nmos1v_iso],nmos1v_iso
+element generic[nmos1v_iso] _nmos_12_iso poly_conn[G] ndiff_conn[S] ndiff_conn[D] psubstrate[B] Nburied[T]
+model=mos[nmos1v_nat],nmos1v_nat
+element mos[nmos1v_nat] _nmos_12_native poly_conn ndiff_conn psubstrate
+model=mos[nmos2v],nmos2v
+element mos[nmos2v] _nmos_25 poly_conn ndiff_conn psubstrate
+model=mos[nmos2v_nat],nmos2v_nat
+element mos[nmos2v_nat] _nmos_25_native poly_conn ndiff_conn psubstrate
+model=mos[pmos1v],pmos1v
+element mos[pmos1v] _pmos_12 poly_conn pdiff_conn nwell_conn
+model=mos[pmos1v_hvt],pmos1v_hvt
+element mos[pmos1v_hvt] _pmos_12_hvt poly_conn pdiff_conn nwell_conn
+model=mos[pmos2v],pmos2v
+element mos[pmos2v] _pmos_25 poly_conn pdiff_conn nwell_conn
+model=mos[pmoscap1v],pmoscap1v
+element mos[pmoscap1v] _pmoscap_12 poly_conn pdiff_conn nwell_conn
+model=mos[pmoscap2v],pmoscap2v
+element mos[pmoscap2v] _pmoscap_25 poly_conn pdiff_conn nwell_conn
+model=mos[pmoscap1v3],pmoscap1v3
+element mos[pmoscap1v3] _pmoscap_12_3 poly_conn pdiff_conn nwell_conn
+model=mos[pmoscap2v3],pmoscap2v3
+element mos[pmoscap2v3] _pmoscap_25_3 poly_conn pdiff_conn nwell_conn
+model=mos[nmoscap1v],nmoscap1v
+element mos[nmoscap1v] _nmoscap_12 poly_conn ndiff_conn psubstrate
+model=mos[nmoscap2v],nmoscap2v
+element mos[nmoscap2v] _nmoscap_25 poly_conn ndiff_conn psubstrate
+model=mos[nmoscap1v3],nmoscap1v3
+element mos[nmoscap1v3] _nmoscap_12_3 poly_conn ndiff_conn psubstrate
+model=mos[nmoscap2v3],nmoscap2v3
+element mos[nmoscap2v3] _nmoscap_25_3 poly_conn ndiff_conn psubstrate
+model=res[ressndiff],ressndiff
+element res[ressndiff] _rndiff ndiff_conn psubstrate
+model=res[resnsndiff],resnsndiff
+element res[resnsndiff] _rndiff_nosal ndiff_conn psubstrate
+model=res[ressnpoly],ressnpoly
+element res[ressnpoly] _rnpoly poly_conn psubstrate
+model=res[ressnpoly],ressnpoly
+element res[ressnpoly] _rnpolynw poly_conn nwell_conn
+model=res[resnsnpoly],resnsnpoly
+element res[resnsnpoly] _rnpoly_nosal poly_conn psubstrate
+model=res[resnsnpoly],resnsnpoly
+element res[resnsnpoly] _rnpolynw_nosal poly_conn nwell_conn
+model=res[resspdiff],resspdiff
+element res[resspdiff] _rpdiff pdiff_conn nwell_conn
+model=res[resnspdiff],resnspdiff
+element res[resnspdiff] _rpdiff_nosal pdiff_conn nwell_conn
+model=res[ressppoly],ressppoly
+element res[ressppoly] _rppoly poly_conn psubstrate
+model=res[ressppoly],ressppoly
+element res[ressppoly] _rppolynw poly_conn nwell_conn
+model=res[resnsppoly],resnsppoly
+element res[resnsppoly] _rppoly_nosal poly_conn psubstrate
+model=res[resnsppoly],resnsppoly
+element res[resnsppoly] _rppolynw_nosal poly_conn nwell_conn
+model=res[resnwsti],resnwsti
+element res[resnwsti] _rnwellsti nwell_conn psubstrate
+model=res[resnwoxide],resnwoxide
+element res[resnwoxide] _rnwellod nwell_conn psubstrate
+model=res[resm1],resm1
+element res[resm1] _resm1 metal1_conn
+model=res[resm2],resm2
+element res[resm2] _resm2 metal2_conn
+model=res[resm3],resm3
+element res[resm3] _resm3 metal3_conn
+model=res[resm4],resm4
+element res[resm4] _resm4 metal4_conn
+model=res[resm5],resm5
+element res[resm5] _resm5 metal5_conn
+model=res[resm6],resm6
+element res[resm6] _resm6 metal6_conn
+model=res[resm7],resm7
+element res[resm7] _resm7 metal7_conn
+model=res[resm8],resm8
+element res[resm8] _resm8 metal8_conn
+model=res[resm9],resm9
+element res[resm9] _resm9 metal9_conn
+model=diode[ndio],ndio
+element diode[ndio] _ndio psubstrate ndiff_conn
+model=diode[pdio],pdio
+element diode[pdio] _pdio pdiff_conn nwell_conn
+model=bjt[vpnp2],vpnp2
+element bjt[vpnp2] _vpnp2 psubstrate nwell_conn pdiff_conn
+model=bjt[vpnp5],vpnp5
+element bjt[vpnp5] _vpnp5 psubstrate nwell_conn pdiff_conn
+model=bjt[vpnp10],vpnp10
+element bjt[vpnp10] _vpnp10 psubstrate nwell_conn pdiff_conn
+model=bjt[pnp],pnp
+element bjt[pnp] _pnp psubstrate nwell_conn pdiff_conn
+model=bjt[npn],npn
+element bjt[npn] _npn npn_coll npn_base npn_emit

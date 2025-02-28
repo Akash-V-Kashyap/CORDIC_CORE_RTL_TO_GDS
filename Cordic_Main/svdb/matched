@@ -1,0 +1,37 @@
+##############################################################################################################
+#####  
+#####                                         PVS LVS COMPARISON
+#####  
+#####  Version                       :   22.20-p031
+#####  NVN Run Start                 :   Mon Oct 21 14:43:03 2024
+#####  ERC Summary File              :   cordic_pipeline.sum
+#####  Extraction Report File        :   cordic_pipeline_lvs.rep
+#####  Comparison Report File        :   cordic_pipeline_lvs.rep.cls
+#####  Top Cell                      :   cordic_pipeline  <vs>  cordic_pipeline
+#####  
+#####  Run Result                    :   MATCH
+#####  
+#####  Run Summary                   :   [INFO]  ERC Results: Empty
+#####                                :   [INFO]  Extraction Clean
+#####                                :   [INFO]  Some Sections Have Been Truncated
+#####  
+#####  Layout Design                 :   /home/vlsi/Cordic/cordic_pipeline.gds.gz (gdsii)
+#####  Layout File                   :   /home/vlsi/Cordic/cordic_pipeline.spi (cdl)
+#####  Schematic File                :   /home/vlsi/Cordic/Cordic_netlist.v (verilog)
+#####  Schematic File                :   /home/vlsi/Cordic/PVS_90nm/Spice_Netlist/all.spi (cdl)
+#####  Rules File                    :   /home/vlsi/Cordic/.technology.rul
+#####  Pin Swap File                 :   cordic_pipeline_lvs.rep.cps
+#####  
+#####  Extraction CPU Time           :   0h 0m 2s - (2s)
+#####  Extraction Exec Time          :   0h 0m 2s - (2s)
+#####  Extraction Peak Memory Usage  :   25.00MB
+#####  NVN CPU Time                  :   0h 0m 0s - (0s)                 
+#####  NVN Exec Time                 :   0h 0m 1s - (1s)                 
+#####  NVN Peak Memory Usage         :   318.04MB
+#####  LVS Total CPU Time            :   0h 0m 2s - (2s)                 
+#####  LVS Total Exec Time           :   0h 0m 3s - (3s)                 
+#####  LVS Total Peak Memory Usage   :   318.04MB
+#####  
+##############################################################################################################
+
+
